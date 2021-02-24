@@ -7,7 +7,7 @@ from torch.nn import init
 from torch.autograd import Variable
 from .utils import *
 import codecs
-import cPickle
+import pickle
 import itertools
 
 class Loader(object):
