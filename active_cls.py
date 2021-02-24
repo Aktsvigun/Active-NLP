@@ -12,7 +12,7 @@ from neural_cls.models import CNN_BB
 import matplotlib.pyplot as plt
 import torch
 from active_learning import Acquisition_CLS
-import cPickle as pkl
+import pickle as pkl
 import numpy as np
 
 import argparse
