@@ -10,6 +10,7 @@ import codecs
 import pickle
 import itertools
 from collections import Counter
+from datasets import load_dataset
 
 class Loader(object):
     
@@ -30,28 +31,17 @@ class Loader(object):
             len(dico), sum(len(x) for x in words)
         ))
         return dico, word_to_id, id_to_word
-    
-    def load_trec(self, datapath, pretrained, word_dim = 100):
-        
-        trainpath = os.path.join(datapath, 'train_5500.label')
-        testpath = os.path.join(datapath, 'TREC_10.label')
-        
-        train_data = []
-        with open (trainpath) as f:
-            for line in f:
-                content = line.strip().split(' ')
-                sentence = ' '.join(content[1:])
-                tag = content[0].split(':')[0]
-                train_data.append((sentence, tag))        
-        
-        test_data = []
-        with open (testpath) as f:
-            for line in f:
-                content = line.strip().split(' ')
-                sentence = ' '.join(content[1:])
-                tag = content[0].split(':')[0]
-                test_data.append((sentence, tag))  
-                
+
+    def load_trec(self, label='coarse'):
+
+        trec_data = load_dataset('trec')
+        train_data, test_data = [], []
+
+        for obs in trec_data['train']:
+            train_data.append((obs['text'], obs[f'label-{label}']))
+        for obs in trec_data['test']:
+            test_data.append((obs['text'], obs[f'label-{label}']))
+
         dico_words_train = self.word_mapping(train_data)[0]
         
         all_embedding = False

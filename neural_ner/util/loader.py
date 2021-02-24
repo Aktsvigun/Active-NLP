@@ -35,7 +35,7 @@ class Loader(object):
                     continue
         chars_length = [len(c) for c in chars_sorted]
         chars_maxlen = max(chars_length)
-        chars_mask = np.zeros((len(chars_sorted), char_maxlen), dtype='int')
+        chars_mask = np.zeros((len(chars_sorted), chars_maxlen), dtype='int')
         for i, c in enumerate(chars_sorted):
             chars_mask[i, :chars_length[i]] = c
         return chars_mask, chars_length, d
@@ -165,9 +165,9 @@ class Loader(object):
                     'parameters': parameters,
                     'word_embeds': word_embeds
                 }
-                cPickle.dump(mappings, f)
+                pickle.dump(mappings, f)
         else:
-            mappings = cPickle.load(open(mapping_file,'rb'))
+            mappings = pickle.load(open(mapping_file,'rb'))
             
         return train_data, dev_data, test_data, test_train_data, mappings
         
@@ -239,9 +239,9 @@ class Loader(object):
                     'parameters': parameters,
                     'word_embeds': word_embeds
                 }
-                cPickle.dump(mappings, f)
+                pickle.dump(mappings, f)
         else:
-            mappings = cPickle.load(open(mapping_file,'rb'))
+            mappings = pickle.load(open(mapping_file,'rb'))
             
         return train_data, dev_data, test_data, mappings
         
