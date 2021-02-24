@@ -200,7 +200,7 @@ if not os.path.exists(os.path.join(result_path, model_name, 'active_checkpoint',
     os.makedirs(os.path.join(result_path, model_name, 'active_checkpoint', acquire_method))
 
 if opt.dataset == 'trec':
-    train_data, test_data, mappings = loader.load_trec(dataset_path, parameters['ptrnd'], 
+    train_data, test_data, mappings = loader.load_trec('coarse', parameters['ptrnd'],
                                                        parameters['wrdim'])
 elif opt.dataset == 'mareview':
     train_data, test_data, mappings = loader.load_mareview(dataset_path, parameters['ptrnd'], 

@@ -32,7 +32,7 @@ class Loader(object):
         ))
         return dico, word_to_id, id_to_word
 
-    def load_trec(self, label='coarse'):
+    def load_trec(self, label="coarse", pretrained="wordvectors/glove.6B.300d.txt", word_dim=100):
 
         trec_data = load_dataset('trec')
         train_data, test_data = [], []
